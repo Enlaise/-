@@ -1,0 +1,21 @@
+# 依賴套件（不需要上傳，Vercel 會自己安裝）
+node_modules
+
+# 打包輸出
+dist
+
+# 本地環境變數（含 API 網址，不能公開）
+.env
+.env.local
+.env.*.local
+
+# 系統檔案
+.DS_Store
+
+# 診斷用腳本（不需要上傳）
+check-permissions.cjs
+generate-report.cjs
+inaccessible-report.json
+inaccessible-final.json
+permissions-needed.md
+permissions-final.md

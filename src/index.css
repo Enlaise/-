@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --color-primary: #e63946;    /* 海報的紅 */
+  --color-secondary: #3a0ca3;  /* 深藍紫 */
+  --color-tertiary: #4361ee;   /* 亮藍 */
+  --color-accent: #c9a84c;     /* 半調黃金 */
+  --color-dark: #0a0a0a;       /* 接近海報的純黑 */
+  --color-light: #f8f9fa;
+  
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  
+  font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fluid Background with Ripples */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.fluid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: var(--color-dark);
+  background-image: radial-gradient(circle at 50% 50%, rgba(15, 15, 25, 1) 0%, rgba(5, 5, 10, 1) 100%);
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ripple-1 {
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, #e63946 0%, #3a0ca3 100%); /* 紅 -> 深藍 */
+  top: -15%;
+  left: -15%;
+  animation-delay: 0s;
+}
+
+.ripple-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #4361ee 0%, #0a0a2e 100%); /* 亮藍 -> 極深 */
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+.ripple-3 {
+  width: 35vw;
+  height: 35vw;
+  background: radial-gradient(circle, #c9a84c 0%, transparent 80%); /* 金色暈 */
+  top: 35%;
+  left: 25%;
+  animation-delay: -10s;
+  opacity: 0.35;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(10%, 15%) scale(1.1);
+  }
+  66% {
+    transform: translate(-10%, 5%) scale(0.9);
+  }
+  100% {
+    transform: translate(5%, -15%) scale(1.2);
+  }
+}
+
+.content-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Matte effect */
+  background: rgba(18, 18, 18, 0.4);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 24px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5em;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1em;
+  color: var(--text-secondary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
