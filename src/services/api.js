@@ -121,7 +121,8 @@ export const fetchVendors = async () => {
 
     return processedData;
   } catch (error) {
-    console.error('Failed to fetch vendors from GAS, using mock data:', error);
+    console.error('API Fetch Error:', error);
+    console.log('Attempted URL:', scriptUrl);
     return MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
   }
 };
