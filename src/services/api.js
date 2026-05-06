@@ -1,4 +1,3 @@
-// Mock Data for Vendors
 const MOCK_VENDORS = [
   {
     id: "1",
@@ -52,27 +51,18 @@ const MOCK_VENDORS = [
   }
 ];
 
-/**
- * Fetch vendors from Google Apps Script.
- * Falls back to mock data if URL is not configured or fetch fails.
- */
 export const fetchVendors = async () => {
   const scriptUrl = import.meta.env.VITE_GOOGLE_APP_SCRIPT_URL;
-  
-  // If URL contains MOCK_URL, use mock data
+
   if (!scriptUrl || scriptUrl.includes('MOCK_URL')) {
-    console.log('Using mock vendor data');
     return new Promise(resolve => {
       setTimeout(() => {
-        // Convert mock string image to array for consistency
-        const mappedMock = MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
-        resolve(mappedMock);
-      }, 800); // Simulate network delay
+        resolve(MOCK_VENDORS.map(v => ({ ...v, image: [v.image] })));
+      }, 800);
     });
   }
 
   try {
-    // Add cache buster to URL to ensure we always get fresh data without triggering CORS preflight
     const fetchUrl = new URL(scriptUrl);
     fetchUrl.searchParams.append('t', new Date().getTime());
 
@@ -81,50 +71,39 @@ export const fetchVendors = async () => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+
     const data = await response.json();
-    
-    // Process image URLs
+
     const processedData = data.map(vendor => {
       let imageArray = [];
       if (vendor.image) {
-        // Force string type in case the cell contained a number
         const imageStr = String(vendor.image);
-        // Split by comma or newline
         const urls = imageStr.split(/[\n,]+/);
         imageArray = urls.map(url => {
           let trimmedUrl = url.trim();
-          
-          // Extract Google Drive ID if present
           let driveId = null;
           if (trimmedUrl.includes('drive.google.com/open?id=')) {
             driveId = trimmedUrl.split('open?id=')[1].split('&')[0];
           } else if (trimmedUrl.includes('drive.google.com/file/d/')) {
             driveId = trimmedUrl.split('/file/d/')[1].split('/')[0];
           }
-          
-          // Use thumbnail endpoint to bypass Google Drive CORS/CORP restrictions
           if (driveId) {
             return `https://drive.google.com/thumbnail?id=${driveId}&sz=w1000`;
           }
-          
           return trimmedUrl;
         }).filter(url => url !== '');
       }
-      
-      // Fallback if empty
+
       if (imageArray.length === 0) {
         imageArray = [`/assets/vendor-${(Math.floor(Math.random() * 5) + 1)}.jpg`];
       }
 
-      return {
-        ...vendor,
-        image: imageArray
-      };
+      return { ...vendor, image: imageArray };
     });
 
     return processedData;
   } catch (error) {
-    console.error('Failed to fetch vendors from GAS, using mock data:', error);
-    return MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
+    console.error('Failed to fetch vendors:', error);
+    return MOCK_VENDORS.map(v => ({ ...v, image: [v.image] }));
   }
 };

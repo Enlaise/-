@@ -18,7 +18,6 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
         justifyContent: 'center',
         padding: '20px'
       }}>
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -35,7 +34,6 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
           }}
         />
 
-        {/* Modal Content */}
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -80,8 +78,6 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            scrollbarWidth: 'none', // For Firefox
-            msOverflowStyle: 'none' // For IE and Edge
           }}>
             {vendor.image.map((img, idx) => (
               <div 
@@ -94,7 +90,6 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
                   scrollSnapAlign: 'start'
                 }} 
               >
-                {/* 模糊背景層：填補直式圖片的空白 */}
                 <div style={{
                   position: 'absolute',
                   top: '-10%', left: '-10%', right: '-10%', bottom: '-10%',
@@ -103,7 +98,6 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
                   opacity: 0.5,
                   zIndex: 0
                 }} />
-                {/* 主圖片層 */}
                 <div style={{
                   position: 'absolute',
                   top: 0, left: 0, right: 0, bottom: 0,

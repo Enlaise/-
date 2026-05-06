@@ -7,7 +7,6 @@ import VendorModal from '../components/VendorModal';
 
 const CATEGORIES = ['全部', '飲食', '服飾', '文創', '互動'];
 
-// 從主視覺海報萃取的代表色
 const CATEGORY_COLORS = {
   '全部': '#050505',
   '飲食': '#c0302a',
@@ -16,18 +15,14 @@ const CATEGORY_COLORS = {
   '互動': '#8994fc',
 };
 
-// 文創色號是淡色，需要深色文字
 const LIGHT_CATEGORIES = new Set(['文創']);
 
-// 這些攤商的圖片全為直式，不要自動尋找橫式封面
 const PORTRAIT_ONLY_VENDORS = new Set(['theJOOP.']);
 
 const VendorCard = ({ vendor, index, onClick }) => {
   const [coverImg, setCoverImg] = useState(vendor.image[0]);
 
   useEffect(() => {
-    // 預設第一張圖，如果在多張圖中找到「橫式」圖片，則自動替換封面
-    // 排除在 PORTRAIT_ONLY_VENDORS 名單內的攤商
     if (vendor.image.length > 1 && !PORTRAIT_ONLY_VENDORS.has(vendor.name)) {
       let foundLandscape = false;
       vendor.image.forEach(imgSrc => {
@@ -236,9 +231,7 @@ const VendorSearch = () => {
           </div>
 
           {totalPages > 1 && (() => {
-            // 智慧分頁：顯示首頁、末頁、當前頁±1，其餘用 … 省略
-            const pages = [];
-            const delta = 1; // 當前頁左右各顯示幾頁
+            const delta = 1;
             const range = [];
 
             for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
@@ -266,7 +259,6 @@ const VendorSearch = () => {
 
             return (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', marginTop: '3rem', flexWrap: 'wrap' }}>
-                {/* 上一頁 */}
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
@@ -283,7 +275,6 @@ const VendorSearch = () => {
                       >{p}</button>
                 )}
 
-                {/* 下一頁 */}
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
