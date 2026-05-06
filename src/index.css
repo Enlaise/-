@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
 
 :root {
-  --color-primary: #e63946;    /* 海報的紅 */
-  --color-secondary: #3a0ca3;  /* 深藍紫 */
-  --color-tertiary: #4361ee;   /* 亮藍 */
-  --color-accent: #c9a84c;     /* 半調黃金 */
-  --color-dark: #0a0a0a;       /* 接近海報的純黑 */
-  --color-light: #f8f9fa;
+  --color-primary: #e63946;
+  --color-secondary: #3a0ca3;
+  --color-tertiary: #4361ee;
+  --color-accent: #c9a84c;
+  --color-dark: #0a0a0a;  --color-light: #f8f9fa;
   
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.15);
@@ -31,7 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Fluid Background with Ripples */
+
 .app-container {
   position: relative;
   min-height: 100vh;
@@ -61,7 +60,7 @@ body {
 .ripple-1 {
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, #e63946 0%, #3a0ca3 100%); /* 紅 -> 深藍 */
+  background: radial-gradient(circle, #e63946 0%, #3a0ca3 100%);
   top: -15%;
   left: -15%;
   animation-delay: 0s;
@@ -70,7 +69,7 @@ body {
 .ripple-2 {
   width: 50vw;
   height: 50vw;
-  background: radial-gradient(circle, #4361ee 0%, #0a0a2e 100%); /* 亮藍 -> 極深 */
+  background: radial-gradient(circle, #4361ee 0%, #0a0a2e 100%);
   bottom: -10%;
   right: -10%;
   animation-delay: -5s;
@@ -79,7 +78,7 @@ body {
 .ripple-3 {
   width: 35vw;
   height: 35vw;
-  background: radial-gradient(circle, #c9a84c 0%, transparent 80%); /* 金色暈 */
+  background: radial-gradient(circle, #c9a84c 0%, transparent 80%);
   top: 35%;
   left: 25%;
   animation-delay: -10s;
@@ -107,11 +106,11 @@ body {
   min-height: 100vh;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  /* Matte effect */
+
   background: rgba(18, 18, 18, 0.4);
 }
 
-/* Glassmorphism Utilities */
+
 .glass-panel {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
@@ -121,7 +120,7 @@ body {
   border-radius: 24px;
 }
 
-/* Buttons */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -160,7 +159,7 @@ body {
   box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
 }
 
-/* Typography */
+
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5em;
   font-weight: 900;
@@ -173,7 +172,7 @@ p {
   color: var(--text-secondary);
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }

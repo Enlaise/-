@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
 
-      {/* ── Hero Section ── */}
+
       <section style={{
         position: 'relative',
         width: '100%',
@@ -17,7 +17,7 @@ const Home = () => {
         alignItems: 'center',
         overflow: 'hidden',
       }}>
-        {/* 橫幅主視覺背景 */}
+
         <div style={{
           position: 'absolute',
           inset: 0,
@@ -28,7 +28,7 @@ const Home = () => {
           zIndex: 0,
         }} />
 
-        {/* 海報縮圖 — 右側浮動 */}
+
         <motion.div
           initial={{ opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
@@ -53,7 +53,7 @@ const Home = () => {
           />
         </motion.div>
 
-        {/* 左側文字區塊 */}
+
         <div style={{
           position: 'relative',
           zIndex: 2,
@@ -65,7 +65,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: 'easeOut' }}
           >
-            {/* 副標 */}
+
             <p style={{
               fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
               letterSpacing: '0.3em',
@@ -76,7 +76,7 @@ const Home = () => {
               第十屆政大藝術季 ｜ 4.20 – 5.15
             </p>
 
-            {/* 主標 */}
+
             <h1 style={{
               fontSize: 'clamp(3.5rem, 10vw, 9rem)',
               fontWeight: 900,
@@ -90,7 +90,7 @@ const Home = () => {
               故・市
             </h1>
 
-            {/* 一句話描述 */}
+
             <p style={{
               fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
               lineHeight: 1.7,
@@ -103,7 +103,7 @@ const Home = () => {
               等待著與你的共鳴。
             </p>
 
-            {/* CTA 按鈕群 */}
+
             <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
               <motion.button
                 whileHover={{ scale: 1.05, y: -3 }}
@@ -156,7 +156,7 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* 底部漸層 fade-out */}
+
         <div style={{
           position: 'absolute',
           bottom: 0,

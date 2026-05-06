@@ -7,6 +7,7 @@ import VendorModal from '../components/VendorModal';
 
 const CATEGORIES = ['全部', '飲食', '服飾', '文創', '互動'];
 
+
 const CATEGORY_COLORS = {
   '全部': '#050505',
   '飲食': '#c0302a',
@@ -15,7 +16,9 @@ const CATEGORY_COLORS = {
   '互動': '#8994fc',
 };
 
+
 const LIGHT_CATEGORIES = new Set(['文創']);
+
 
 const PORTRAIT_ONLY_VENDORS = new Set(['theJOOP.']);
 
@@ -23,6 +26,7 @@ const VendorCard = ({ vendor, index, onClick }) => {
   const [coverImg, setCoverImg] = useState(vendor.image[0]);
 
   useEffect(() => {
+
     if (vendor.image.length > 1 && !PORTRAIT_ONLY_VENDORS.has(vendor.name)) {
       let foundLandscape = false;
       vendor.image.forEach(imgSrc => {
@@ -231,6 +235,8 @@ const VendorSearch = () => {
           </div>
 
           {totalPages > 1 && (() => {
+
+            const pages = [];
             const delta = 1;
             const range = [];
 
@@ -259,6 +265,7 @@ const VendorSearch = () => {
 
             return (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', marginTop: '3rem', flexWrap: 'wrap' }}>
+
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
@@ -274,6 +281,7 @@ const VendorSearch = () => {
                         style={btnStyle(currentPage === p)}
                       >{p}</button>
                 )}
+
 
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}

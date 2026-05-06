@@ -18,6 +18,7 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
         justifyContent: 'center',
         padding: '20px'
       }}>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -33,6 +34,7 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
             backdropFilter: 'blur(8px)'
           }}
         />
+
 
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -78,6 +80,8 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
           }}>
             {vendor.image.map((img, idx) => (
               <div 
@@ -90,6 +94,7 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
                   scrollSnapAlign: 'start'
                 }} 
               >
+
                 <div style={{
                   position: 'absolute',
                   top: '-10%', left: '-10%', right: '-10%', bottom: '-10%',
@@ -98,6 +103,7 @@ const VendorModal = ({ vendor, isOpen, onClose }) => {
                   opacity: 0.5,
                   zIndex: 0
                 }} />
+
                 <div style={{
                   position: 'absolute',
                   top: 0, left: 0, right: 0, bottom: 0,

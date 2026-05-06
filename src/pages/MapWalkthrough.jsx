@@ -11,7 +11,7 @@ const MapWalkthrough = () => {
   const [selectedVendor, setSelectedVendor] = useState(null);
   const mapRef = useRef(null);
 
-  // Simplified drag state for custom map
+
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dragStart = useRef({ x: 0, y: 0 });
@@ -41,7 +41,7 @@ const MapWalkthrough = () => {
     setIsDragging(false);
   };
 
-  // Predefined positions for demo vendors on the pseudo-map
+
   const getPinPosition = (location) => {
     const posMap = {
       'A01': { top: '20%', left: '30%' },
@@ -100,7 +100,7 @@ const MapWalkthrough = () => {
           background: 'radial-gradient(circle at 50% 50%, rgba(30, 30, 30, 0.5) 0%, rgba(10, 10, 10, 0.8) 100%)',
         }}
       >
-        {/* Pseudo Map Background Element - Wait for actual map image replacement */}
+
         <div style={{
           position: 'absolute',
           top: '50%',
@@ -116,7 +116,7 @@ const MapWalkthrough = () => {
         }}>
           <h1 style={{ opacity: 0.2, fontSize: '4rem' }}>校園示意地圖 (請在此替換底圖)</h1>
           
-          {/* Mock Buildings */}
+
           <div style={{ position: 'absolute', top: '10%', left: '10%', width: '200px', height: '150px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>行政大樓</div>
           <div style={{ position: 'absolute', bottom: '20%', right: '15%', width: '300px', height: '200px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>圖書館</div>
         </div>

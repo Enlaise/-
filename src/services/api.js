@@ -1,3 +1,4 @@
+
 const MOCK_VENDORS = [
   {
     id: "1",
@@ -51,18 +52,24 @@ const MOCK_VENDORS = [
   }
 ];
 
+
 export const fetchVendors = async () => {
   const scriptUrl = import.meta.env.VITE_GOOGLE_APP_SCRIPT_URL;
+  
 
   if (!scriptUrl || scriptUrl.includes('MOCK_URL')) {
+    console.log('Using mock vendor data');
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve(MOCK_VENDORS.map(v => ({ ...v, image: [v.image] })));
+
+        const mappedMock = MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
+        resolve(mappedMock);
       }, 800);
     });
   }
 
   try {
+
     const fetchUrl = new URL(scriptUrl);
     fetchUrl.searchParams.append('t', new Date().getTime());
 
@@ -71,39 +78,50 @@ export const fetchVendors = async () => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-
     const data = await response.json();
+    
 
     const processedData = data.map(vendor => {
       let imageArray = [];
       if (vendor.image) {
+
         const imageStr = String(vendor.image);
+
         const urls = imageStr.split(/[\n,]+/);
         imageArray = urls.map(url => {
           let trimmedUrl = url.trim();
+          
+
           let driveId = null;
           if (trimmedUrl.includes('drive.google.com/open?id=')) {
             driveId = trimmedUrl.split('open?id=')[1].split('&')[0];
           } else if (trimmedUrl.includes('drive.google.com/file/d/')) {
             driveId = trimmedUrl.split('/file/d/')[1].split('/')[0];
           }
+          
+
           if (driveId) {
             return `https://drive.google.com/thumbnail?id=${driveId}&sz=w1000`;
           }
+          
           return trimmedUrl;
         }).filter(url => url !== '');
       }
+      
 
       if (imageArray.length === 0) {
         imageArray = [`/assets/vendor-${(Math.floor(Math.random() * 5) + 1)}.jpg`];
       }
 
-      return { ...vendor, image: imageArray };
+      return {
+        ...vendor,
+        image: imageArray
+      };
     });
 
     return processedData;
   } catch (error) {
-    console.error('Failed to fetch vendors:', error);
-    return MOCK_VENDORS.map(v => ({ ...v, image: [v.image] }));
+    console.error('Failed to fetch vendors from GAS, using mock data:', error);
+    return MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
   }
 };
