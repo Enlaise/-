@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { fetchVendors } from '../services/api';
-import VendorModal from '../components/VendorModal';
+
 
 const MapWalkthrough = () => {
   const navigate = useNavigate();
   const [vendors, setVendors] = useState([]);
-  const [selectedVendor, setSelectedVendor] = useState(null);
+  const [vendors, setVendors] = useState([]);
   const mapRef = useRef(null);
 
 
@@ -129,7 +129,7 @@ const MapWalkthrough = () => {
               whileHover={{ scale: 1.1, zIndex: 50 }}
               onClick={(e) => {
                 e.stopPropagation();
-                setSelectedVendor(vendor);
+                navigate(`/vendor/${vendor.id}`);
               }}
               style={{
                 position: 'absolute',
@@ -167,11 +167,6 @@ const MapWalkthrough = () => {
         })}
       </div>
 
-      <VendorModal 
-        vendor={selectedVendor} 
-        isOpen={!!selectedVendor} 
-        onClose={() => setSelectedVendor(null)} 
-      />
     </div>
   );
 };

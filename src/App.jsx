@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import VendorSearch from './pages/VendorSearch';
 import MapWalkthrough from './pages/MapWalkthrough';
+import VendorDetail from './pages/VendorDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<VendorSearch />} />
           <Route path="/map" element={<MapWalkthrough />} />
+          <Route path="/vendor/:id" element={<VendorDetail />} />
         </Routes>
       </div>
     </div>

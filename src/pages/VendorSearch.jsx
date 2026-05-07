@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Search, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { fetchVendors } from '../services/api';
-import VendorModal from '../components/VendorModal';
+
 
 const CATEGORIES = ['全部', '飲食', '服飾', '文創', '互動'];
 
@@ -120,7 +120,7 @@ const VendorSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('全部');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedVendor, setSelectedVendor] = useState(null);
+
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -229,7 +229,7 @@ const VendorSearch = () => {
                 key={vendor.id} 
                 vendor={vendor} 
                 index={index} 
-                onClick={setSelectedVendor} 
+                onClick={(v) => navigate(`/vendor/${v.id}`)} 
               />
             ))}
           </div>
@@ -294,11 +294,6 @@ const VendorSearch = () => {
         </>
       )}
 
-      <VendorModal 
-        vendor={selectedVendor} 
-        isOpen={!!selectedVendor} 
-        onClose={() => setSelectedVendor(null)} 
-      />
     </div>
   );
 };
