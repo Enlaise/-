@@ -229,7 +229,7 @@ const VendorSearch = () => {
                 key={vendor.id} 
                 vendor={vendor} 
                 index={index} 
-                onClick={(v) => navigate(`/vendor/${v.id}`)} 
+                onClick={(v) => window.open(`/vendor/${v.id}`, '_blank')} 
               />
             ))}
           </div>

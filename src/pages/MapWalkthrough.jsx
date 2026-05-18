@@ -127,10 +127,10 @@ const MapWalkthrough = () => {
             <motion.div
               key={vendor.id}
               whileHover={{ scale: 1.1, zIndex: 50 }}
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(`/vendor/${vendor.id}`);
-              }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(`/vendor/${vendor.id}`, '_blank');
+                }}
               style={{
                 position: 'absolute',
                 top: pos.top,
