@@ -115,6 +115,7 @@ export const fetchVendors = async () => {
 
       return {
         ...vendor,
+        location: (vendor && (String(vendor.name).trim() === '水果芭檯' || String(vendor.name).trim() === '水果芭台')) ? 64 : vendor.location,
         image: imageArray
       };
     });
@@ -126,3 +127,25 @@ export const fetchVendors = async () => {
     return MOCK_VENDORS.map(v => ({...v, image: [v.image]}));
   }
 };
+
+export const LUSH_BOOTHS = new Set([
+  1, 6, 7, 8, 9, 10, 11, 12, 13, 16, 64, 66, 67, 69, 70, 72, 73, 74, 76, 77, 79, 84, 85
+]);
+
+export const LUSH_NAMES = new Set([
+  '一口餃', '脆薯熱狗、鳥蛋,綿綿冰', '綺楽燒', '小佑佑手作', 
+  '記憶刈包．豬血糕．鳥蛋', '媽の紅茶冰．搖滾🎸炸物', ' 拔絲地瓜起司馬鈴薯', '拔絲地瓜起司馬鈴薯',
+  'YA家堡', '峻永的店', '永峻的店', '青玥梅酒', '水果芭檯', '水果芭台',
+  'Mini Lava', '老牛豆花嫩仙草', '焙禮絲烘焙', '就醬吧', '高美木瓜牛奶',
+  '靠杯搖搖雞', '台灣鯛魚燒 TAIWAN TAIYAKI', '台灣鯛魚燒',
+  '玖棧粉圓', '玖棧手工煎餃', '印度甩餅', 'Yu COFFEE羽咖啡', 'Devil&Angel-惡魔天使餐車'
+]);
+
+export const isLushCooperative = (vendor) => {
+  if (!vendor) return false;
+  const locStr = String(vendor.location).trim();
+  const locNum = parseInt(locStr);
+  const nameClean = String(vendor.name).trim();
+  return LUSH_BOOTHS.has(locNum) || LUSH_NAMES.has(nameClean);
+};
+

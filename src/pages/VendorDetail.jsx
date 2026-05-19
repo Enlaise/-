@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronLeft, MapPin, ExternalLink, Package } from 'lucide-react';
-import { fetchVendors } from '../services/api';
+import { ChevronLeft, MapPin, ExternalLink, Package, Leaf } from 'lucide-react';
+import { fetchVendors, isLushCooperative } from '../services/api';
 
 const VendorDetail = () => {
   const { id } = useParams();
@@ -23,6 +23,8 @@ const VendorDetail = () => {
 
   if (loading) return <div style={{ color: 'white', textAlign: 'center', padding: '100px' }}>載入中...</div>;
   if (!vendor) return <div style={{ color: 'white', textAlign: 'center', padding: '100px' }}>找不到該商家</div>;
+
+  const isLush = isLushCooperative(vendor);
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', color: 'white', paddingBottom: '50px' }}>
@@ -115,6 +117,29 @@ const VendorDetail = () => {
             borderRadius: '24px',
             border: '1px solid rgba(255,255,255,0.1)'
           }}>
+            {isLush && (
+              <div style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '16px',
+                background: 'rgba(61,186,110,0.07)',
+                border: '1px solid rgba(61,186,110,0.3)',
+                padding: '1.2rem',
+                borderRadius: '16px',
+                marginBottom: '0.5rem'
+              }}>
+                <Leaf size={24} color="#3dba6e" style={{ marginTop: '4px', flexShrink: 0 }} />
+                <div>
+                  <h4 style={{ margin: '0 0 6px 0', fontSize: '1.05rem', color: '#3dba6e', fontWeight: 700 }}>
+                    LUSH 綠色減塑合作商家
+                  </h4>
+                  <p style={{ margin: 0, fontSize: '1rem', lineHeight: '1.5', color: 'rgba(255,255,255,0.85)' }}>
+                    本攤商配合 LUSH 零包裝環保方案！自備環保容器/袋子消費，即可享有店家環保小回饋。
+                  </p>
+                </div>
+              </div>
+            )}
+
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
               <Package size={24} color="var(--color-tertiary)" style={{ marginTop: '4px' }} />
               <div>
@@ -150,3 +175,5 @@ const VendorDetail = () => {
 };
 
 export default VendorDetail;
+
+

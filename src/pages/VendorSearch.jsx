@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Search, ChevronLeft } from 'lucide-react';
+import { Search, ChevronLeft, Leaf } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { fetchVendors } from '../services/api';
+import { fetchVendors, isLushCooperative } from '../services/api';
 
 
 const CATEGORIES = ['全部', '飲食', '服飾', '文創', '互動'];
@@ -24,6 +24,7 @@ const PORTRAIT_ONLY_VENDORS = new Set(['theJOOP.']);
 
 const VendorCard = ({ vendor, index, onClick }) => {
   const [coverImg, setCoverImg] = useState(vendor.image[0]);
+  const isLush = isLushCooperative(vendor);
 
   useEffect(() => {
 
@@ -79,7 +80,30 @@ const VendorCard = ({ vendor, index, onClick }) => {
           background: `url(${coverImg}) center/contain no-repeat`,
           zIndex: 1
         }} />
+        {isLush && (
+          <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            right: '12px',
+            background: 'rgba(10,35,20,0.85)',
+            border: '1px solid #3dba6e',
+            color: '#3dba6e',
+            borderRadius: '6px',
+            padding: '4px 10px',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            zIndex: 2,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+          }}>
+            <Leaf size={12} />
+            LUSH 減塑合作
+          </div>
+        )}
       </div>
+
       <div style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
           <h3 style={{ margin: 0, fontSize: '1.4rem' }}>{vendor.name}</h3>
