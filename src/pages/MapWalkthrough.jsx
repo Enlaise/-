@@ -609,62 +609,7 @@ const MapWalkthrough = () => {
                     objectFit: 'fill',
                     userSelect: 'none',
                   }}
-                />
-
-                {/* 互動式熱區按鈕 */}
-                {Object.entries(boothCoords).map(([num, rect]) => {
-                  const isOfficial = OFFICIAL_BOOTHS[Number(num)];
-                  const isLush = LUSH_BOOTHS.has(Number(num)) || (isOfficial && isOfficial.isLush);
-                  const hasVendor = isOfficial || vendors.some(v => {
-                    const locStr = String(v.location);
-                    const parts = locStr.split(/[、,]+/).map(p => p.trim());
-                    return parts.includes(String(num));
-                  });
-
-                  return (
-                    <button
-                      key={num}
-                      onPointerDown={handleHotspotPointerDown}
-                      onPointerUp={(e) => handleHotspotPointerUp(e, num)}
-                      onMouseEnter={() => setHoveredBooth(num)}
-                      onMouseMove={(e) => setTooltipPos({ x: e.clientX, y: e.clientY })}
-                      onMouseLeave={() => setHoveredBooth(null)}
-                      style={{
-                        position: 'absolute',
-                        left: `${rect.left}%`,
-                        top: `${rect.top}%`,
-                        width: `${rect.width}%`,
-                        height: `${rect.height}%`,
-                        background: isLush 
-                          ? 'rgba(61,186,110,0.22)' 
-                          : (hoveredBooth === num ? 'rgba(160,100,255,0.25)' : 'transparent'),
-                        border: isLush 
-                          ? '1.5px solid rgba(61,186,110,0.85)' 
-                          : (hoveredBooth === num ? '1.5px solid rgba(160,100,255,0.9)' : '1px dashed rgba(255,255,255,0.06)'),
-                        borderRadius: '2px',
-                        cursor: (hasVendor && !isOfficial) ? 'pointer' : 'default',
-                        zIndex: 5,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'all 0.15s ease',
-                        boxShadow: (isLush && hoveredBooth === num) ? '0 0 10px rgba(61,186,110,0.6)' : 'none'
-                      }}
-                    >
-                      {isLush && (
-                        <Leaf 
-                          size={9} 
-                          color="#3dba6e" 
-                          style={{ 
-                            opacity: 0.9,
-                            filter: 'drop-shadow(0 0 2px rgba(0,0,0,0.8))'
-                          }} 
-                        />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
+                />              </div>
 
               {/* 暗角 vignette */}
               <div
@@ -723,64 +668,6 @@ const MapWalkthrough = () => {
         </motion.div>
       </div>
 
-      {/* ── 懸浮 Tooltip ── */}
-      {hoveredBooth && (() => {
-        let target = OFFICIAL_BOOTHS[Number(hoveredBooth)];
-        if (!target) {
-          target = vendors.find(v => {
-            const locStr = String(v.location);
-            const parts = locStr.split(/[、,]+/).map(p => p.trim());
-            return parts.includes(String(hoveredBooth));
-          });
-        }
-
-        const isLush = LUSH_BOOTHS.has(Number(hoveredBooth)) || (target && target.isLush);
-
-        return (
-          <div
-            style={{
-              position: 'fixed',
-              left: `${tooltipPos.x + 16}px`,
-              top: `${tooltipPos.y + 16}px`,
-              zIndex: 100,
-              background: 'rgba(10,5,22,0.92)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1.5px solid rgba(160,100,255,0.35)',
-              borderRadius: '12px',
-              padding: '10px 14px',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.65)',
-              pointerEvents: 'none',
-              maxWidth: '220px',
-              transition: 'opacity 0.1s ease',
-            }}
-          >
-            <div style={{ fontSize: '0.7rem', color: 'rgba(160,100,255,0.8)', fontWeight: 700, marginBottom: '4px', letterSpacing: '0.05em' }}>
-              攤位 {hoveredBooth}
-            </div>
-            <div style={{ fontSize: '1rem', fontWeight: 900, color: '#fff', marginBottom: '4px', lineHeight: 1.3 }}>
-              {target ? target.name : '（一般攤位）'}
-            </div>
-            {target && (
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginBottom: '6px' }}>
-                {target.isOfficial ? target.category : `分類：${target.category}`}
-              </div>
-            )}
-            {target && !target.isOfficial && (
-              <div style={{ fontSize: '0.68rem', color: 'rgba(160,100,255,0.85)', marginTop: '4px' }}>
-                點擊查看詳情
-              </div>
-            )}
-            {isLush && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.72rem', color: '#3dba6e', fontWeight: 700, marginTop: '4px' }}>
-                <Leaf size={11} />
-                LUSH 減塑合作
-              </div>
-            )}
-          </div>
-        );
-      })()}
-
       {/* ── 底部提示 ── */}
       <div
         style={{
@@ -799,7 +686,7 @@ const MapWalkthrough = () => {
         }}
       >
         <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.2em' }}>
-          拖曳移動 · 雙擊或滾輪縮放 · 點擊攤位可查看商家
+          拖曳移動 · 雙擊或滾輪縮放
         </span>
       </div>
     </div>
