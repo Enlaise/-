@@ -442,14 +442,14 @@ const MapWalkthrough = () => {
 
       {/* ── 縮放工具列（右側） ── */}
       <motion.div
-        initial={{ opacity: 0, x: 16 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
         style={{
-          position: 'absolute',
+          position: 'fixed',
           bottom: '2rem',
           right: '1.2rem',
-          zIndex: 20,
+          zIndex: 999,
           display: 'flex',
           flexDirection: 'column',
           gap: '8px',

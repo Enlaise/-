@@ -1,6 +1,6 @@
 
 Add done.
-[main ba39270] fix: remove map overlays and correct map image path
+[main 507070e] fix: remove map overlays and correct map image path
  Committer: Sun Shao Jyun <sshaojun@SundeMacBook-Air-2.local>
 Your name and email address were configured automatically based
 on your username and hostname. Please check that they are accurate.
@@ -14,9 +14,8 @@ After doing this, you may fix the identity used for this commit with:
 
     git commit --amend --reset-author
 
- 4 files changed, 72 insertions(+), 115 deletions(-)
- create mode 100644 public/git_push_log.txt
- create mode 100644 vite.config.js.timestamp-1779210505579-6a0f97effac688.mjs
+ 4 files changed, 76 insertions(+), 61 deletions(-)
+ rename vite.config.js.timestamp-1779210505579-6a0f97effac688.mjs => vite.config.js.timestamp-1779210846709-c9e23088c38b88.mjs (77%)
 
 Commit done.
 
