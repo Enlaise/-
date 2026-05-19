@@ -511,7 +511,6 @@ const MapWalkthrough = () => {
           justifyContent: 'center',
           cursor: isDragging ? 'grabbing' : 'grab',
           userSelect: 'none',
-          touchAction: 'none',
         }}
       >
         <motion.div
