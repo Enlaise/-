@@ -493,44 +493,7 @@ const MapWalkthrough = () => {
         ))}
       </motion.div>
 
-      {/* ── 左下：圖例 ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        style={{
-          position: 'absolute',
-          bottom: '1.2rem',
-          left: '1.2rem',
-          zIndex: 20,
-          background: 'rgba(10,5,20,0.7)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(160,100,255,0.2)',
-          borderRadius: '14px',
-          padding: '0.9rem 1.1rem',
-        }}
-      >
-        <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: 'rgba(160,100,255,0.9)', marginBottom: '0.6rem', fontWeight: 700 }}>
-          圖例
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '18px', height: '12px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: '2px', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)' }}>一般商家</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '18px', height: '12px', background: 'rgba(61,186,110,0.25)', border: '1.5px solid #3dba6e', borderRadius: '2px', flexShrink: 0 }} />
-            <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)' }}>LUSH 環保配合商家</span>
-          </div>
-        </div>
-        <div style={{ marginTop: '0.7rem', paddingTop: '0.6rem', borderTop: '1px solid rgba(160,100,255,0.15)', display: 'flex', alignItems: 'center', gap: '7px' }}>
-          <Leaf size={12} color="#3dba6e" />
-          <span style={{ fontSize: '0.68rem', color: 'rgba(61,186,110,0.85)', lineHeight: 1.4 }}>
-            綠色攤位支持 LUSH 零包裝環保方案
-          </span>
-        </div>
-      </motion.div>
+
 
       {/* ── 可拖曳地圖與清單區域 ── */}
       <div
@@ -646,23 +609,66 @@ const MapWalkthrough = () => {
               </div>
             </div>
 
-            {/* 2. 互動式詳細攤商清單（取代原圖的靜態文字，支援懸浮高亮地圖與點擊跳轉） */}
+            {/* 2. 互動式詳細攤商清單與底部圖例 */}
             <div 
               data-no-drag
               style={{
                 background: 'rgba(13, 6, 26, 0.96)',
                 borderTop: '1px solid rgba(160,100,255,0.18)',
                 padding: '2rem 2.5rem',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
-                gap: '1.5rem 2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.5rem',
                 userSelect: 'text',
                 zIndex: 4,
               }}
             >
-              {renderBoothListColumn(1, 29)}
-              {renderBoothListColumn(30, 58)}
-              {renderBoothListColumn(59, 85)}
+              {/* 3 欄攤商清單 */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '1.5rem 2rem',
+                }}
+              >
+                {renderBoothListColumn(1, 29)}
+                {renderBoothListColumn(30, 58)}
+                {renderBoothListColumn(59, 85)}
+              </div>
+
+              {/* 橫式響應式圖例條 */}
+              <div
+                style={{
+                  borderTop: '1px solid rgba(160,100,255,0.15)',
+                  paddingTop: '1.5rem',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '1.5rem 2.5rem',
+                }}
+              >
+                <div style={{ fontSize: '0.75rem', letterSpacing: '0.15em', color: 'rgba(160,100,255,0.9)', fontWeight: 900 }}>
+                  圖例 LEGEND
+                </div>
+                
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '18px', height: '12px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.4)', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)' }}>一般商家</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '18px', height: '12px', background: 'rgba(61,186,110,0.25)', border: '1.5px solid #3dba6e', borderRadius: '2px' }} />
+                  <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)' }}>LUSH 環保配合商家</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Leaf size={12} color="#3dba6e" />
+                  <span style={{ fontSize: '0.72rem', color: 'rgba(61,186,110,0.85)' }}>
+                    綠色攤位支持 LUSH 零包裝環保方案
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
