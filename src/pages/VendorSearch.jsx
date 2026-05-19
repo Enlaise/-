@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -115,6 +115,7 @@ const VendorCard = ({ vendor, index, onClick }) => {
 
 const VendorSearch = () => {
   const navigate = useNavigate();
+  const topRef = useRef(null);
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -122,6 +123,10 @@ const VendorSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 6;
+
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -146,7 +151,7 @@ const VendorSearch = () => {
   );
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh' }}>
+    <div ref={topRef} style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', minHeight: '100vh' }}>
       <button 
         onClick={() => navigate('/')}
         className="btn btn-glass"
@@ -225,11 +230,14 @@ const VendorSearch = () => {
             gap: '2rem' 
           }}>
             {currentVendors.map((vendor, index) => (
-              <VendorCard 
-                key={vendor.id} 
-                vendor={vendor} 
-                index={index} 
-                onClick={(v) => navigate(`/vendor/${v.id}`)} 
+              <VendorCard
+                key={vendor.id}
+                vendor={vendor}
+                index={index}
+                onClick={(v) => {
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                  navigate(`/vendor/${v.id}`);
+                }}
               />
             ))}
           </div>
@@ -267,7 +275,7 @@ const VendorSearch = () => {
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', marginTop: '3rem', flexWrap: 'wrap' }}>
 
                 <button
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  onClick={() => { setCurrentPage(p => Math.max(1, p - 1)); scrollToTop(); }}
                   disabled={currentPage === 1}
                   style={{ ...btnStyle(false), opacity: currentPage === 1 ? 0.3 : 1 }}
                 >‹</button>
@@ -277,14 +285,14 @@ const VendorSearch = () => {
                     ? <span key={`ellipsis-${i}`} style={{ color: 'rgba(255,255,255,0.4)', padding: '0 4px' }}>…</span>
                     : <button
                         key={p}
-                        onClick={() => setCurrentPage(p)}
+                        onClick={() => { setCurrentPage(p); scrollToTop(); }}
                         style={btnStyle(currentPage === p)}
                       >{p}</button>
                 )}
 
 
                 <button
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  onClick={() => { setCurrentPage(p => Math.min(totalPages, p + 1)); scrollToTop(); }}
                   disabled={currentPage === totalPages}
                   style={{ ...btnStyle(false), opacity: currentPage === totalPages ? 0.3 : 1 }}
                 >›</button>
