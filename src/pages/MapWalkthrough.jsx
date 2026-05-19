@@ -440,63 +440,7 @@ const MapWalkthrough = () => {
         </div>
       </motion.div>
 
-      {/* ── 縮放工具列（右側） ── */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4 }}
-        style={{
-          position: 'fixed',
-          bottom: '2rem',
-          right: '1.2rem',
-          zIndex: 999,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px',
-        }}
-      >
-        {[
-          { icon: <ZoomIn size={16} />, action: () => setScale((s) => Math.min(3, s + 0.3)), label: '放大' },
-          { icon: <ZoomOut size={16} />, action: () => setScale((s) => Math.max(0.3, s - 0.3)), label: '縮小' },
-          { icon: <RotateCcw size={16} />, action: reset, label: '重設' },
-        ].map(({ icon, action, label }) => (
-          <button
-            key={label}
-            onPointerDown={(e) => {
-              e.stopPropagation();
-              action();
-              e.currentTarget.blur();
-            }}
-            onClick={(e) => e.stopPropagation()}
-            title={label}
-            style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.07)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: 'rgba(255,255,255,0.75)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(120,40,200,0.35)';
-              e.currentTarget.style.borderColor = 'rgba(160,100,255,0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-            }}
-          >
-            {icon}
-          </button>
-        ))}
-      </motion.div>
+
 
 
 
