@@ -462,7 +462,12 @@ const MapWalkthrough = () => {
         ].map(({ icon, action, label }) => (
           <button
             key={label}
-            onClick={action}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              action();
+              e.currentTarget.blur();
+            }}
+            onClick={(e) => e.stopPropagation()}
             title={label}
             style={{
               width: '38px',
