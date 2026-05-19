@@ -40,10 +40,11 @@ const VendorDetail = () => {
       }}>
         <button 
           onClick={() => navigate(-1)} 
-          style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          className="btn btn-glass"
+          style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
         >
-          <ChevronLeft size={24} />
-          <span style={{ marginLeft: '8px' }}>返回</span>
+          <ChevronLeft size={20} />
+          上一頁
         </button>
       </div>
 
